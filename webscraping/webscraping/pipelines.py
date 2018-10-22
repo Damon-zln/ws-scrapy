@@ -31,7 +31,7 @@ class MongoPipeline(object):
                 or isinstance(item, CA_RealestateItem) or isinstance(item, CA_Prolic_accountancyItem)\
                 or isinstance(item, CA_Prolic_acupunctureItem) or isinstance(item, CA_Prolic_architectItem)\
                 or isinstance(item, CA_Prolic_courtReporterItem) or isinstance(item, CA_Prolic_hearing_aid_dispenserItem)\
-                or isinstance(item, CA_Prolic_professional_fiduciaryItem):
+                or isinstance(item, CA_Prolic_professional_fiduciaryItem) or isinstance(item, CA_ProlicItem):
             self.db[item.collection].insert(dict(item))
         return item
 

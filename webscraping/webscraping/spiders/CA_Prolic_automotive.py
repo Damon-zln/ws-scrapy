@@ -7,6 +7,7 @@
 from scrapy import Request, Spider
 from bs4 import BeautifulSoup
 from webscraping.items import *
+import re
 
 
 L = [chr(i) for i in range(97, 123)]
@@ -52,15 +53,15 @@ class ProlicSpider(Spider):
         for tr in trs:
             tr = tr.text
             if 'Licensee Name:' in tr:
-                prolic['license_name'] = tr.replace('Licensee Name:', '').strip()
+                prolic['license_name'] = re.sub(' {2,}', ' ', tr.replace('Licensee Name:', '').strip())
             if 'License Type:' in tr:
                 prolic['license_type'] = tr.replace('License Type:', '').strip()
             if 'License Number:' in tr:
                 prolic['license_number'] = tr.replace('License Number:', '').strip()
             if 'License Status:' in tr:
-                prolic['license_status'] = tr.replace('License Status:', '').strip()
+                prolic['license_status'] = tr.replace('License Status:', '').strip('Definition').strip()
             if 'Expiration Date:' in tr:
-                prolic['expiration_date'] = tr.replace('Expiration Date:', '').strip()
+                prolic['expiration_date'] = re.sub(' {2,}', ' ', tr.replace('Expiration Date:', '').strip())
             if 'Address:' in tr:
                 prolic['address'] = tr.replace('Address:', '').strip()
             if 'City:' in tr:

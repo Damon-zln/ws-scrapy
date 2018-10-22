@@ -180,4 +180,14 @@ class CA_RealestateItem(Item):
     main_office = Field()
 
 
-
+class CA_ProlicItem(Item):
+    collection = 'ca_prolic'
+    license_number = Field()
+    name = Field()
+    license_type = Field()
+    license_status = Field()
+    experience_completed = Field()
+    previous_names = Field()
+    address = Field()
+    issue_date = Field()
+    expiration_date = Field()
