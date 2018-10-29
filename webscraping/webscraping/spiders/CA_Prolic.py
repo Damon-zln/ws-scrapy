@@ -25,8 +25,10 @@ class ProlicSpider(Spider):
     def start_requests(self):
         for board in boards:
             for sendKey in sendKeys:
-                yield FormRequest(url=self.base_url, headers=headers,
-                                  formdata={'boardCode': board, 'lastName': sendKey}, callback=self.parse_page)
+                for sendKey2 in sendKeys:
+                    key = sendKey + sendKey2
+                    yield FormRequest(url=self.base_url, headers=headers,
+                                      formdata={'boardCode': board, 'lastName': key}, callback=self.parse_page)
 
     def parse_page(self, response):
         soup = BeautifulSoup(response.text, 'lxml')
@@ -56,8 +58,9 @@ class ProlicSpider(Spider):
                     prolic['previous_names'] = i.strip('Previous Names:').strip()
         address = soup.select('div[id="address"] p')
         if address:
-            add_value = str(address[1])
-            prolic['address'] = add_value.replace('<p class="wrapWithSpace">', '').strip('</p>').replace('<br/>', ', ')
+            if len(address) >= 2:
+                add_value = str(address[1])
+                prolic['address'] = add_value.replace('<p class="wrapWithSpace">', '').strip('</p>').replace('<br/>', ', ')
         prolic['issue_date'] = soup.select('p[id="issueDate"]')[0].text
         prolic['expiration_date'] = soup.select('p[id="expDate"]')[0].text
         yield prolic

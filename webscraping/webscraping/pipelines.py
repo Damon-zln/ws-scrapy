@@ -26,12 +26,7 @@ class MongoPipeline(object):
         self.db = self.client[self.mongo_db]
 
     def process_item(self, item, spider):
-        if isinstance(item, CA_EngineerItem) or isinstance(item, CA_Prolic_registered_pharmacistItem) \
-                or isinstance(item, CA_Prolic_pharmacy_technician) or isinstance(item, CA_Prolic_automotiveItem)\
-                or isinstance(item, CA_RealestateItem) or isinstance(item, CA_Prolic_accountancyItem)\
-                or isinstance(item, CA_Prolic_acupunctureItem) or isinstance(item, CA_Prolic_architectItem)\
-                or isinstance(item, CA_Prolic_courtReporterItem) or isinstance(item, CA_Prolic_hearing_aid_dispenserItem)\
-                or isinstance(item, CA_Prolic_professional_fiduciaryItem) or isinstance(item, CA_ProlicItem):
+        if isinstance(item, CA_EngineerItem) or isinstance(item, CA_RealestateItem) or isinstance(item, CA_ProlicItem):
             self.db[item.collection].insert(dict(item))
         return item
 
