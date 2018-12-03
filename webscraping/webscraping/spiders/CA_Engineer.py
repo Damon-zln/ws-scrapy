@@ -14,6 +14,7 @@ headers = {
 }
 
 sendKeys = [chr(i) for i in range(97, 123)]
+sendKeys2 = [chr(i) for i in range(97, 123)]
 
 
 class EngineerSpider(Spider):
@@ -22,7 +23,7 @@ class EngineerSpider(Spider):
 
     def start_requests(self):
         for sendKey in sendKeys:
-            for sendKey2 in sendKeys:
+            for sendKey2 in sendKeys2:
                 key = sendKey + sendKey2
                 yield FormRequest(url=self.base_url, headers=headers, formdata={'boardCode': '31', 'lastName': key}, callback=self.parse_page)
 
