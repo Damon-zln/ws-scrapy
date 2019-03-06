@@ -97,9 +97,9 @@ DOWNLOADER_MIDDLEWARES = {
     'webscraping.middlewares.ProxyMiddleware': 543,
 }
 
-MONGO_URI = '10.201.11.218'
+MONGO_URI = '10.255.1.175'
 MONGO_DB = 'webscrape'
 PROXY_URL = 'http://10.51.1.140:8080'
 SCHEDULER = 'scrapy_redis.scheduler.Scheduler'
 DUPEFILTER_CLASS = 'scrapy_redis.dupefilter.RFPDupeFilter'
-REDIS_URL = 'redis://:foobared@10.201.11.218:6379'
+REDIS_URL = 'redis://:foobared@10.255.1.175:6379'
